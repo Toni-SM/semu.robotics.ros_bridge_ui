@@ -1,17 +1,6 @@
-# omni.add_on.ros_bridge_ui
-ROS Bridge UI (add-on) for NVIDIA Omniverse Isaac Sim
+## ROS Bridge UI (add-on) for NVIDIA Omniverse Isaac Sim
 
-> This extension enables the **menu and commands** of the **ROS interfaces that are used for general purpose and robot control**
-
-The components are compatible with both [ROS](https://www.ros.org/) and [ROS2](https://www.ros.org/). 
-
-They can be created from the following menus:
-
-* *Create > Isaac > ROS*
-  * *Compressed Camera*
-* *Create > Isaac > ROS Control*
-  * *Follow Joint Trajectory*
-  * *Gripper Command*
+> This extension enables the **menu and commands** of the of the ROS interfaces for the **ROS add-ons extensions**. The components are compatible with both [ROS](https://www.ros.org/) and [ROS2](https://www.ros.org/)
 
 <br>
 
@@ -19,6 +8,7 @@ They can be created from the following menus:
 
 - [Prerequisites](#prerequisites)
 - [Add the extension to NVIDIA Omniverse Isaac Sim and enable it](#extension)
+- [Menu items](#menu)
 - [Supported commands](#commands)
 
 <br>
@@ -26,17 +16,49 @@ They can be created from the following menus:
 <a name="prerequisites"></a>
 ### Prerequisites
 
-This extension requires the following extensions to be present in the Isaac Sim's extension path:
+This extension requires the following extensions to be present in the Isaac Sim extension path:
 
-* [omni.usd.schema.add_on](https://github.com/Toni-SM/omni.usd.schema.add_on): USD add-on schemas
+- [omni.usd.schema.add_on](https://github.com/Toni-SM/omni.usd.schema.add_on): USD add-on schemas
 
 <br>
 
 <a name="extension"></a>
 ### Add the extension to NVIDIA Omniverse Isaac Sim and enable it
 
-1. Download the latest [release](https://github.com/Toni-SM/omni.add_on.ros_bridge_ui/releases), or any release according to your Isaac Sim version, and unzip it into the Isaac Sim's extension path (```/isaac-sim/exts``` for containers or ```~/.local/share/ov/pkg/isaac_sim-2021.1.0/exts``` for native workstations)
-2. Enable the extension in the menu *Window > Extensions* under the same name
+1. Add the the extension by following the steps described in [Extension Search Paths](https://docs.omniverse.nvidia.com/py/kit/docs/guide/extensions.html#extension-search-paths) or simply download and unzip the latest [release](https://github.com/Toni-SM/omni.add_on.ros_bridge_ui/releases) in one of the extension folders such as ```PATH_TO_OMNIVERSE_APP/exts```
+
+    Git url (git+https) as extension search path: 
+    
+    ```
+    git+https://github.com/Toni-SM/omni.add_on.ros_bridge_ui.git?branch=main&dir=exts
+    ```
+
+2. Enable the extension by following the steps described in [Extension Enabling/Disabling](https://docs.omniverse.nvidia.com/py/kit/docs/guide/extensions.html#extension-enabling-disabling)
+
+<br>
+
+<a name="menu"></a>
+### Menu items
+
+The following items will be created under the *Create > Isaac* menu once the extension is activated
+
+* *Create > Isaac > ROS*
+
+  * *Compressed Camera*
+
+  * *Attribute*
+
+* *Create > Isaac > ROS Control*
+
+  * *Follow Joint Trajectory*
+
+  * *Gripper Command*
+
+Menu items (preview)
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/22400377/139479274-6783f4c2-e948-4aac-858d-aac6a8cf9928.png" width="60%">
+</p>
 
 <br>
 
@@ -45,7 +67,7 @@ This extension requires the following extensions to be present in the Isaac Sim'
 
 The following commands are supported:
 
-* **Compressed Camera:** [CompressedImage](https://docs.ros.org/en/api/sensor_msgs/html/msg/CompressedImage.html) message type 
+* **Compressed Camera:** [CompressedImage](https://docs.ros.org/en/api/sensor_msgs/html/msg/CompressedImage.html) message type (ROS publisher)
 
     ```python
     class ROSBridgeCreateCompressedCamera(
@@ -63,7 +85,21 @@ The following commands are supported:
     )
     ```
 
-* **Follow Joint Trajectory:** [FollowJointTrajectory](http://docs.ros.org/en/api/control_msgs/html/action/FollowJointTrajectory.html) action service
+* **Attribute:** Get or set prim attributes (ROS service)
+
+    ```python
+    class ROSBridgeCreateAttribute(
+        path: str = "/ROS_Attribute",
+        parent = None,
+        enabled: bool = True,
+        prims_service_topic: str = "/get_prims",
+        attributes_service_topic: str = "/get_attributes",
+        get_attr_service_topic: str = "/get_attribute",
+        set_attr_service_topic: str = "/set_attribute"
+    )
+    ```
+
+* **Follow Joint Trajectory:** [FollowJointTrajectory](http://docs.ros.org/en/api/control_msgs/html/action/FollowJointTrajectory.html) action type (ROS action)
     
     ```python
     class ROSControlBridgeCreateFollowJointTrajectory(
@@ -75,7 +111,7 @@ The following commands are supported:
         articulation_prim_rel = None
     )
     ```
-* **Gripper Command:** [GripperCommand](http://docs.ros.org/en/api/control_msgs/html/action/GripperCommand.html) action service
+* **Gripper Command:** [GripperCommand](http://docs.ros.org/en/api/control_msgs/html/action/GripperCommand.html) action type (ROS action)
 
     ```python
     class ROSControlBridgeCreateGripperCommand(
