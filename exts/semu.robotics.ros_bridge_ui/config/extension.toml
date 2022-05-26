@@ -3,29 +3,31 @@ reloadable = true
 order = 0
 
 [package]
-version = "0.0.2"
+version = "0.0.3"
 category = "Simulation"
+feature = false
+app = false
 title = "ROS UI (add-on)"
-description = "Contains UI elements and scripts shared by the ROS add-on bridges"
+description = "Contains UI elements and scripts shared by the ROS bridges (semu namespace)"
 authors = ["Toni-SM"]
-repository = ""
-keywords = ["add-on", "ROS"]
+repository = "https://github.com/Toni-SM/semu.robotics.ros_bridge_ui"
+keywords = ["command", "menu", "ROS"]
 changelog = "docs/CHANGELOG.md"
 readme = "docs/README.md"
 preview_image = "data/preview.png"
 icon = "data/icon.png"
 
 [dependencies]
+"omni.usd" = {}
 "omni.kit.uiapp" = {}
 "omni.kit.commands" = {}
 "omni.kit.menu.utils" = {}
-"omni.usd" = {}
 "omni.isaac.ros_bridge_ui" = {}
-"omni.usd.schema.add_on" = {}
+"semu.usd.schemas" = {}
 
 [[python.module]]
-name = "omni.add_on.ros_bridge_ui"
+name = "semu.robotics.ros_bridge_ui"
 
 [[python.module]]
-name = "omni.add_on.ros_bridge_ui.tests"
+name = "semu.robotics.ros_bridge_ui.tests"
 public = false

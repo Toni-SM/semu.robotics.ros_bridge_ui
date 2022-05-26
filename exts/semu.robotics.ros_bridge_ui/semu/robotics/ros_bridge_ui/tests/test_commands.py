@@ -25,10 +25,6 @@ class TestRosBridgeCommands(omni.kit.test.AsyncTestCaseFailOnLogError):
 
     # Run all commands
     async def test_ros_command(self):
-        print("test_ros_command - ROSBridgeCreateCompressedCamera")
-        result, prim = omni.kit.commands.execute("ROSBridgeCreateCompressedCamera", 
-                                                 path="/ROS_CompressedCamera")
-
         print("test_ros_command - ROSBridgeCreateAttribute")
         result, prim = omni.kit.commands.execute("ROSBridgeCreateAttribute", 
                                                  path="/ROS_Attribute")

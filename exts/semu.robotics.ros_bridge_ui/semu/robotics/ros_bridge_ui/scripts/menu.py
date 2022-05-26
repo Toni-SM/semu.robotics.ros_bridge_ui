@@ -11,7 +11,6 @@ class RosBridgeMenu:
         self._menus = []
 
         menu_items_ros = [
-            MenuItemDescription(name="Compressed Camera", onclick_fn=lambda a=weakref.proxy(self): a.add_compressed_camera()),
             MenuItemDescription(name="Attribute", onclick_fn=lambda a=weakref.proxy(self): a.add_attribute())
         ]
 
@@ -25,12 +24,6 @@ class RosBridgeMenu:
             MenuItemDescription(name="Isaac", sub_menu=[MenuItemDescription(name="ROS Control", sub_menu=menu_items_ros_control)])
         ]
         add_menu_items(self._menu_items, "Create")
-
-    def add_compressed_camera(self):
-        result, prim = omni.kit.commands.execute(
-            "ROSBridgeCreateCompressedCamera", 
-            path="/ROS_CompressedCamera", parent=BridgeMenu._get_stage_and_path(self)
-        )
 
     def add_attribute(self):
         result, prim = omni.kit.commands.execute(

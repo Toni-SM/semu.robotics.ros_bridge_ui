@@ -5,7 +5,7 @@ from .menu import RosBridgeMenu
 
 
 class Extension(omni.ext.IExt):
-    def on_startup(self):
+    def on_startup(self, ext_id):
         self._menu = None
         self._menu = RosBridgeMenu()
 
