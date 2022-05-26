@@ -19,7 +19,7 @@
 
 <br>
 
-![showcase](exts/semu.usd.schemas/data/preview.png)
+![showcase](exts/semu.robotics.ros_bridge_ui/data/preview.png)
 
 <hr>
 
